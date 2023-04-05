@@ -35,11 +35,14 @@ const HomeScreen = () => {
         <Text className="text-[#1f75fe] text-[38px] font-bold">
           Good Moments.
         </Text>
+        <Text className="text-[#656565] text-base">
+          Find and Visit The Best Locations There on Earth Based on Your Budget. Plan Your Trips With Us.
+        </Text>
       </View>
 
       {/* Circle Section */}
-      <View className="w-[400px] h-[400px] bg-[#87b4fd] rounded-full absolute bottom-36 -right-36"></View>
-      <View className="w-[400px] h-[400px] bg-[#b5d2ff] rounded-full absolute -bottom-28 -left-36"></View>
+      <View className="w-[360px] h-[360px] bg-[#5495ff] rounded-full absolute bottom-36 -right-36"></View>
+      <View className="w-[400px] h-[400px] bg-[#b5d0ff] rounded-full absolute -bottom-28 -left-36"></View>
 
       {/* Image container */}
       <View className="flex-1 relative items-center justify-center">
