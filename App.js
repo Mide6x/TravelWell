@@ -38,6 +38,7 @@ export default function App() {
             component={Home}
           />
           <Stack.Screen
+          options={{headerShown: false}}
           name="Discover"
           component={Discover}
           />

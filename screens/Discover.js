@@ -1,28 +1,76 @@
-import { SafeAreaView, View, Text } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
-import React, { useLayoutEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native';
+
+const API_KEY = '29Jx4L65z8i8T0YxdVghd3RKMbIAtRQX'; // Replace with your actual API key
+const API_URL = `https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}`;
 
 const Discover = () => {
-  const navigation = useNavigation();
+  const [naira, setNaira] = useState('');
+  const [dollars, setDollars] = useState('');
+  
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
+  const convertNairaToDollars = (value) => {
+    setNaira(value);
+    const dollars = parseFloat(value) / 411;
+    setDollars(dollars.toFixed(2));
+  };
+
+  const convertDollarsToNaira = (value) => {
+    setDollars(value);
+    const naira = parseFloat(value) * 411;
+    setNaira(naira.toFixed(2));
+  };
+
+
   return (
-    <SafeAreaView className="flex-1, bg-sky-200 relative ">
-      <View className="flex-row items-center justify-between px-8">
-        <View className="mt-5">
-           <Text className="text-[40px] text-[#1f75fe] font-bold">Discover</Text>
-           <Text className="text-[#558eea] text-[36px]">the beauty today</Text>
-        </View>
-        <View>
-       
-        </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <View style={styles.container}>
+      <Text style={styles.title}>Currency Converter</Text>
+      <View style={styles.inputContainer}>
+        <Text>Enter amount in Naira:</Text>
+        <TextInput
+          style={styles.input}
+          keyboardType="numeric"
+          onChangeText={(value) => convertNairaToDollars(value)}
+          value={naira}
+        />
       </View>
-    </SafeAreaView>
-  )
-}
+      <View style={styles.inputContainer}>
+        <Text>Enter amount in Dollars:</Text>
+        <TextInput
+          style={styles.input}
+          keyboardType="numeric"
+          onChangeText={(value) => convertDollarsToNaira(value)}
+          value={dollars}
+        />
+      </View>
+    </View>
+    </TouchableWithoutFeedback>
+  );
+};
 
-export default Discover
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#e7feff'
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  inputContainer: {
+    marginBottom: 16,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 8,
+    marginTop: 8,
+    borderRadius:5,
+  },
+});
+
+export default Discover;
